@@ -1,0 +1,52 @@
+<div *ngFor="let country of country">
+    <h2 *ngIf="country">
+        Country Details
+    </h2>
+    <div class="row pt-1" *ngIf="country">
+        <div class="col-sm-3 col-md-3 pt-2" *ngIf="country.flag">
+            <img src='{{country.flag}}' style="height:150px;width:100%;">
+        </div>
+        <div class="col-md pt-2">
+            <table class="table table-responsive">
+                <tbody class="table-bordered">
+                    <tr *ngIf="country.name">
+                        <th>Country Name</th>
+                        <td><b>{{country.name}}</b></td>
+                    </tr>
+                    <tr *ngIf="country.altSpellings">
+                            <th>Alt Name</th>
+                            <td><b>{{country.altSpellings}}</b></td>
+                    </tr>
+                    <tr *ngIf="country.capital">
+                        <th>Country Capital</th>
+                        <td><b>{{country.capital}}</b></td>
+                    </tr>
+                    <tr *ngIf="country.alpha3Code">
+                        <th>Country Code</th>
+                        <td><b>{{country.alpha3Code}}</b></td>
+                    </tr>
+                    <tr *ngIf="country.region">
+                        <th>Region</th>
+                        <td><b>{{country.region}}</b></td>
+                    </tr>
+                    <tr *ngIf="country.population">
+                        <th>Population</th>
+                        <td><b>{{country.population}}</b></td>
+                    </tr>
+                    <tr *ngIf="country.population">
+                        <th>National Language</th>
+                        <td><b>{{country.demonym}}</b></td>
+                    </tr>
+                    <tr *ngFor="let currency of country.currencies">
+                            <th>Currency</th>
+                            <td><b>{{currency.symbol}} , {{currency.code}} , {{currency.name}}  </b></td>
+                    </tr>
+                    <tr *ngIf="country.topLevelDomain">
+                        <th>Country Domain</th>
+                        <td><b>{{country.topLevelDomain}}</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

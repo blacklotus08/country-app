@@ -1,0 +1,34 @@
+<div class="col-md-4 border border-secondary" *ngIf="countries">
+    <h2 class="text-center">
+     Edit Country
+    </h2>
+    <form method="post">
+        <div class="form-group col-md-12 pt-1" style="display: none;">
+            <label for="country_code">Country Id</label>
+            <input type="text" class="form-control" name="countryId" #countryId="ngModel" [(ngModel)]="countries._id"  value="{{countries._id}}">
+          </div>
+      <div class="form-group col-md-12 pt-1">
+        <label for="country_code">Country Code</label>
+        <input type="text" class="form-control" name="countryCode" #countryCode="ngModel" [(ngModel)]="countries.country_code"  value="{{countries.country_code}}" required>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="country_name">Country Name</label>
+        <input type="text" class="form-control" name="countryName" #countryName="ngModel" [(ngModel)]="countries.country_name"  value="{{countries.country_name}}" required>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="country_region">Region</label>
+        <select class="form-control" name="countryRegion" #countryRegion="ngModel" [(ngModel)]="countries.country_region" value="{{countries.country_region}}">
+          <option value="Africa">Africa</option>
+          <option value="Americas">Americas</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
+        </select>
+      </div>
+      <div class="row justify-content-md-center py-2">
+        <div class="col-md-auto">
+          <button type="button" class="btn btn-primary" (click)="updateCountry(countries._id)" routerLink="">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>

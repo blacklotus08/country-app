@@ -1,13 +1,12 @@
-import { Component, OnInit, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Router  } from '@angular/router';
 
 /*Model*/
 import { Country } from '../country.model';
 /*Service*/
 import { CountriesService } from '../countries.service';
-
-
 
 @Component({
   selector: 'app-country',
@@ -24,6 +23,7 @@ export class CountryComponent {
   pageSize = 5;
   collectionSize: number;
 
+  @ViewChild("reset", {static: false}) nameField: ElementRef;
 
   _listFilter = '';
   get listFilter(): string {
@@ -51,7 +51,8 @@ export class CountryComponent {
 
   constructor(private countriesService: CountriesService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   performFilter(filterBy: string): Country[] {
@@ -59,10 +60,18 @@ export class CountryComponent {
     filterBy = filterBy.toLocaleLowerCase();
     console.log(filterBy + 'Filter');
 
-    /* Filter by Search Bar and Drop Down Filter */
-    return this.countries.filter((country: Country) =>
+    if (this._regionFilter == '') {
+      return this.countries.filter((country: Country) =>
+      (country.country_code.toLocaleLowerCase().indexOf(filterBy) !== -1 || country.country_name.toLocaleLowerCase().indexOf(filterBy) !== -1))
+
+    }else {
+      return this.countries.filter((country: Country) =>
       (country.country_code.toLocaleLowerCase().indexOf(filterBy) !== -1 || country.country_name.toLocaleLowerCase().indexOf(filterBy) !== -1)
-      && country.country_region === this._regionFilter)
+      && country.country_region == this._regionFilter)
+    }
+
+    /* Filter by Search Bar and Drop Down Filter */
+    
   }
 
   performFilterbyRegion(filterBy: string): Country[] {
@@ -78,6 +87,7 @@ export class CountryComponent {
   }
 
   ngOnInit() {
+
     this.spinner.show();
 
     this.countriesService.getCountry().subscribe(
@@ -85,13 +95,10 @@ export class CountryComponent {
         this.countries = countries;
         this.AllCountries = countries;
         this.collectionSize = this.countries.length;
-        this.spinner.hide();
+        this.spinner.hide();    
       },
       error => this.errorMessage = <any>error
     );
-
-    console.log(this._regionFilter);
-
   }
 
   get filteredCountry(): Country[] {
@@ -113,5 +120,13 @@ export class CountryComponent {
       );
 
     }
+  }
+
+  resetFields() {
+    this._regionFilter = '';
+    this._listFilter = '';
+    this.onChange(this._regionFilter);
+    this.nameField.nativeElement.blur();
+ 
   }
 }

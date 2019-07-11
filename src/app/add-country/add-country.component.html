@@ -6,7 +6,11 @@
     <form novalidate (ngSubmit)="save()" [formGroup]="countryForm">
       <div class="form-group col-md-12 pt-1">
         <label for="country_code">Country Code</label>
-        <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
+        <!-- <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
+          formControlName="countryCode" [ngClass]="{'is-invalid': (countryForm.get('countryCode').touched ||
+          countryForm.get('countryCode').dirty) &&
+          !countryForm.get('countryCode').valid }" /> -->
+          <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
           formControlName="countryCode" [ngClass]="{'is-invalid': (countryForm.get('countryCode').touched ||
           countryForm.get('countryCode').dirty) &&
           !countryForm.get('countryCode').valid }" />
@@ -20,11 +24,11 @@
             Please enter country code.
           </span>
         </span>
-        <!-- <span class="invalid-feedback">
+        <span class="invalid-feedback">
           <span *ngIf="countryForm.get('countryCode').errors?.record_exist">
             Record provided already exist.
           </span>
-        </span> -->
+        </span>
 
       </div>
       <div class="form-group col-md-12">
@@ -65,7 +69,7 @@
     </form>
   </div>
 </div>
-<!-- <br>Dirty: {{ countryForm.dirty }}
+<br>Dirty: {{ countryForm.dirty }}
 <br>Touched: {{ countryForm.touched }}
-<br>Valid: {{ countryForm.valid }}
-<br>Value: {{ countryForm.value | json }} -->
+<br>Valid: {{ countryForm.get('countryCode').valid }}
+<br>Value: {{ countryForm.value | json }}

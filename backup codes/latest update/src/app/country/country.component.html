@@ -5,9 +5,16 @@
   <div class='card-body'>
     <div class='row'>
       <div class='col-md-1'>Search:</div>
-      <div class='col-md'>
+      <!-- <div class='col-md'>
         <input type='text' [(ngModel)]='listFilter' />
+      </div> -->
+      <div class="input-group col-md">
+        <input type='text' [(ngModel)]='listFilter' />
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" #reset (click)="resetFields()">Reset</button>
+        </div>
       </div>
+
       <div class='col-md-2 offset-md-3'>
         <select name="region" class="form-control" [(ngModel)]="regionFilter" (change)="onChange($event.target.value)">
           <option value="" selected>All</option>

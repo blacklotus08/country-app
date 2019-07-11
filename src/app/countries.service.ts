@@ -62,9 +62,13 @@ export class CountriesService {
   deleteCountry(id, countries) {
     this.httpService.delete(this.baseUrl + '/' + id,this.httpOptions).subscribe(countries);
     console.log("Record successfully deleted.");
-
-    
   }  
+
+  CheckCode(id) {
+    return this.httpService.get<Country[]>(this.baseUrl,this.httpOptions).pipe(
+      tap(data => console.log('Record Check Code:' + JSON.stringify(data))),catchError(this.handleError)
+    );
+  }
 
   private handleError(err: HttpErrorResponse) {
     // in a real world app, we may send the server to some remote logging infrastructure

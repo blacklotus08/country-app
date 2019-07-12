@@ -1,0 +1,17 @@
+div.card-header {
+    font-size: large;
+   }
+   
+   div.card {
+     margin-top: 10px
+   }
+   
+   .table {
+     margin-top: 10px
+   }
+
+
+   .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #1269c7 !important;
+}

@@ -1,0 +1,14 @@
+<ngx-spinner bdOpacity=0.9 bdColor="#91b0dd" size="large" color="#ffffff" type="ball-clip-rotate-multiple"
+  [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<nav class='navbar navbar-expand navbar-light bg-light'>
+    <a class='navbar-brand'>{{title}}</a>
+    <ul class='nav nav-pills'>
+      <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/country']">Home</a></li>
+      <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/add-country']">Add Country</a></li>
+    </ul>
+</nav>
+<div class='container'>
+  <router-outlet></router-outlet>
+</div>

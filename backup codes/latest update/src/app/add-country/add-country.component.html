@@ -6,7 +6,11 @@
     <form novalidate (ngSubmit)="save()" [formGroup]="countryForm">
       <div class="form-group col-md-12 pt-1">
         <label for="country_code">Country Code</label>
-        <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
+        <!-- <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
+          formControlName="countryCode" [ngClass]="{'is-invalid': (countryForm.get('countryCode').touched ||
+          countryForm.get('countryCode').dirty) &&
+          !countryForm.get('countryCode').valid }" /> -->
+          <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
           formControlName="countryCode" [ngClass]="{'is-invalid': (countryForm.get('countryCode').touched ||
           countryForm.get('countryCode').dirty) &&
           !countryForm.get('countryCode').valid }" />

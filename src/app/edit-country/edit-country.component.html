@@ -9,7 +9,7 @@
         <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
           formControlName="countryCode" [ngClass]="{'is-invalid': (countryForm.get('countryCode').touched ||
               countryForm.get('countryCode').dirty) &&
-              !countryForm.get('countryCode').valid }" />
+              !countryForm.get('countryCode').valid }" disabled />
         <!-- <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
               formControlName="countryCode" [ngClass]="{'is-invalid': codeMessage}" /> -->
         <!-- <span class="invalid-feedback">
@@ -32,7 +32,7 @@
         <input type="text" required class="form-control" id="country_name" name="country_name"
           placeholder="Country Name" formControlName="countryName" [ngClass]="{'is-invalid': (countryForm.get('countryName').touched ||
               countryForm.get('countryName').dirty) &&
-              !countryForm.get('countryName').valid }" />
+              !countryForm.get('countryName').valid }" disabled />
         <span class="invalid-feedback">
           <span *ngIf="countryForm.get('countryName').errors?.required">
             Please enter country name.

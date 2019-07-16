@@ -4,29 +4,32 @@
   </div>
   <div class='card-body'>
     <form novalidate (ngSubmit)="save()" [formGroup]="countryForm">
-      <div class="form-group col-md-12 pt-1">
+      <div class="form-group col-md-12 pt-1 ng-autocomplete">
         <label for="country_code">Country Code</label>
-        <!-- <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
+        <input type="text" list="codes" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
           formControlName="countryCode" [ngClass]="{'is-invalid': (countryForm.get('countryCode').touched ||
-          countryForm.get('countryCode').dirty) &&
-          !countryForm.get('countryCode').valid }" /> -->
-          <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
-          formControlName="countryCode" [ngClass]="{'is-invalid': (countryForm.get('countryCode').touched ||
-          countryForm.get('countryCode').dirty) &&
-          !countryForm.get('countryCode').valid }" />
-        <!-- <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
-          formControlName="countryCode" [ngClass]="{'is-invalid': codeMessage}" /> -->
-        <!-- <span class="invalid-feedback">
-          {{ codeMessage}}
-        </span> -->
+                countryForm.get('countryCode').dirty) &&
+                !countryForm.get('countryCode').valid }" 
+                (change)='selectEvent($event)'
+                autocomplete="off"
+                 />
+                <datalist id="codes">
+                  <option *ngFor="let country of filteredcountries" [value]="country.country_code">{{country.country_code}} - {{country.country_name}}</option>
+                </datalist>
+  
         <span class="invalid-feedback">
-          <span *ngIf="countryForm.get('countryCode').errors?.required">
+          <span *ngIf="countryForm.get('countryCode').errors?.required ">
             Please enter country code.
           </span>
         </span>
         <span class="invalid-feedback">
           <span *ngIf="countryForm.get('countryCode').errors?.record_exist">
-            Record provided already exist.
+            Country Code provided already used.
+          </span>
+        </span>
+        <span class="invalid-feedback">
+          <span *ngIf="countryForm.get('countryCode').errors?.country_check">
+            Invalid Country Code.
           </span>
         </span>
 
@@ -40,6 +43,11 @@
         <span class="invalid-feedback">
           <span *ngIf="countryForm.get('countryName').errors?.required">
             Please enter country name.
+          </span>
+        </span>
+        <span class="invalid-feedback">
+          <span *ngIf="countryForm.get('countryName').errors?.country_check">
+            Invalid Country Name.
           </span>
         </span>
       </div>
@@ -69,7 +77,7 @@
     </form>
   </div>
 </div>
-<br>Dirty: {{ countryForm.dirty }}
+<!-- <br>Dirty: {{ countryForm.dirty }}
 <br>Touched: {{ countryForm.touched }}
 <br>Valid: {{ countryForm.get('countryCode').valid }}
-<br>Value: {{ countryForm.value | json }}
+<br>Value: {{ countryForm.value | json }} -->

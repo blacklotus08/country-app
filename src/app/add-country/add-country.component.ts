@@ -1,16 +1,32 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Country } from '../country.model';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+
+/* Data */
+import { COUNTRIES } from '../mock-country';
 
 /*Service*/
 import { CountriesService } from '../countries.service';
 import { ValidateIdNotTaken } from '../async-code-not-taken.validator';
-import { debounceTime } from 'rxjs/operators';
+
+
+function countryCheck(c : AbstractControl) : {[key:string] : boolean} | null {
+  let list = COUNTRIES.filter((country: Country) =>
+  (country.country_name == c.value || country.country_name.toLocaleLowerCase == c.value.toLowerCase() 
+   || country.country_code == c.value || country.country_code.toLocaleLowerCase == c.value.toLowerCase() 
+  )).length;
+  if (c.value != '' && list == 0) {
+      return { 'country_check' : true }
+  }
+
+  return null;
+
+}
 
 @Component({
   selector: 'app-add-country',
@@ -24,6 +40,8 @@ export class AddCountryComponent implements OnInit {
   errorMessage = '';
   codeMessage: string;
   private sub: Subscription;
+  public mockcountries = COUNTRIES;
+  public filteredcountries;
 
   constructor(private countriesService: CountriesService,
     private spinner: NgxSpinnerService,
@@ -44,12 +62,13 @@ export class AddCountryComponent implements OnInit {
     );
 
     this.countryForm = this.fb.group({
-      countryCode: ['', [Validators.required]],
-      countryName: ['', Validators.required],
+      countryCode: ['', [Validators.required, countryCheck]],
+      countryName: ['', [Validators.required, countryCheck]],
       countryRegion: 'Africa'
     });
 
     this.countryForm.controls['countryCode'].setAsyncValidators(ValidateIdNotTaken.createValidator(this.countriesService));
+    this.filteredcountries = COUNTRIES;
 
     setTimeout(() => {
       this.spinner.hide();
@@ -90,5 +109,22 @@ export class AddCountryComponent implements OnInit {
       countryName: 'China'
     });
   }
+  
+  public selectEvent(country): void {
+    let code = country.target.value;
+    let list = COUNTRIES.filter(x => x.country_code === code)[0];
+    this.countryForm.patchValue({
+      countryCode: list.country_code,
+      countryName: list.country_name
+    });
+  }
 
+  public pressedKey(country) {
+    let value = country.target.value;
+    // this.filteredcountries = COUNTRIES.filter(country => country.country_code.toLocaleLowerCase().indexOf(value) !== -1 
+    //                                       || country.country_name.toLocaleLowerCase().indexOf(value) !== 0)
+    //                                   .slice(1,10);   
+    this.filteredcountries = COUNTRIES.filter(country => country.country_code.toLocaleLowerCase().indexOf(value) !== -1).slice(1,10);     
+  }
+ 
 }

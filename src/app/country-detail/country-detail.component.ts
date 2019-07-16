@@ -37,11 +37,11 @@ export class CountryDetailComponent implements OnInit {
       .subscribe(
         param => {
           if (param) {
-            this.countryDetailService.getCountryDetail(param.name);
-            this.spinner.hide();
+            this.countryDetailService.getCountryDetail(param.name);           
           }
         }
       )
+      this.spinner.hide();
   }
 
   get country(): Array<any>[] {
@@ -49,6 +49,7 @@ export class CountryDetailComponent implements OnInit {
   }
 
   goBack(): void {
+    this.countryDetailService.countries = [];
     this.location.back();
   }
 

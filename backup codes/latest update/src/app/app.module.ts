@@ -6,6 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
  
 
 
@@ -35,7 +36,8 @@ import { EditCountryComponent } from './edit-country/edit-country.component';
     NgbModule,
     NgxSpinnerModule,
     BrowserAnimationsModule, 
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AutocompleteLibModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

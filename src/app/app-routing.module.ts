@@ -8,7 +8,6 @@ import { CountryEditGuard } from './country-edit.guard';
 
 const routes: Routes = [
   { path: '', component : CountryComponent },
-  { path: 'country' , component : CountryComponent },
   { path: 'country-detail/:name' , component : CountryDetailComponent },
   { path: 'add-country' , component : AddCountryComponent },
   { path: 'edit-country/:id' ,

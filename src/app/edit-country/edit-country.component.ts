@@ -101,7 +101,7 @@ export class EditCountryComponent implements OnInit {
               },
               error => this.errorMessage = error as any
             );
-            this.router.navigate(['/country']);
+            this.router.navigate(['/']);
             this.toastr.success('Record successfully updated.', '',
               {
                 positionClass: 'toast-top-center',

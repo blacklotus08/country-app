@@ -69,7 +69,7 @@ export class AddCountryComponent implements OnInit {
     };
     console.log(JSON.stringify('Save Record:' + countries));
     this.countriesService.addCountry(countries);
-    this.router.navigate(['/country']);
+    this.router.navigate(['/']);
     this.toastr.success('Record successfully added.', '',
       {
         positionClass: 'toast-top-center',

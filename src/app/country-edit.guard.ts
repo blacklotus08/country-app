@@ -9,7 +9,7 @@ import { EditCountryComponent } from './edit-country/edit-country.component';
 
 
 export class CountryEditGuard implements CanDeactivate<EditCountryComponent> {
-    canDeactivate(component : EditCountryComponent) : boolean {
+    canDeactivate(component: EditCountryComponent): boolean {
         if (component.countryForm.dirty) {
             const countryName = component.countryForm.get('countryName').value;
             return confirm(`Navigate away and lose all changes to ${countryName} record?`);

@@ -17,18 +17,18 @@ export class ValidateIdNotTaken {
       return countryService.CheckCode(control.value).pipe(debounceTime(1000)).map(res => {
           this.countries = res;
           this.countries = this.countries.filter((country: Country) =>
-          (country.country_code == control.value || country.country_code.toLocaleLowerCase == control.value.toLowerCase()))
+          (country.country_code === control.value || country.country_code.toLocaleLowerCase === control.value.toLowerCase()));
 
           console.log('Response: ' + JSON.stringify(this.countries));
           console.log('Length: ' + JSON.stringify(this.countries.length));
 
           if (this.countries.length == 0) {
               console.log('inside');
-            return null;
-          }else{
-            return {record_exist:true};
-          }   
+              return null;
+          } else {
+            return {record_exist: true};
+          }
       });
-    }
+    };
   }
 }

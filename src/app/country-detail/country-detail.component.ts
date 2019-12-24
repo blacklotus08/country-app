@@ -29,7 +29,7 @@ export class CountryDetailComponent implements OnInit {
     setTimeout(() => {
       this.getCountry();
     }, 2000);
-    
+
   }
 
   getCountry(): void {
@@ -41,7 +41,7 @@ export class CountryDetailComponent implements OnInit {
             this.spinner.hide();
           }
         }
-      )
+      );
   }
 
   get country(): Array<any>[] {

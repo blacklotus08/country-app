@@ -28,13 +28,13 @@ export class EditCountryComponent implements OnInit {
 
 
   constructor(private acttivatedRoute: ActivatedRoute,
-    private countriesService: CountriesService,
-    private spinner: NgxSpinnerService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
-    private fb: FormBuilder,
-    private toastr: ToastrService
+              private countriesService: CountriesService,
+              private spinner: NgxSpinnerService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private location: Location,
+              private fb: FormBuilder,
+              private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -53,14 +53,14 @@ export class EditCountryComponent implements OnInit {
             this.getCountry(param.id);
           }
         }
-      )
+      );
   }
 
   getCountry(id): void {
     this.countriesService.getCountryById(id)
       .subscribe(
         (country: Country) => this.displayCountry(country),
-        (error: any) => this.errorMessage = <any>error
+        (error: any) => this.errorMessage = error as any
       );
   }
 
@@ -87,11 +87,11 @@ export class EditCountryComponent implements OnInit {
       .subscribe(
         param => {
           if (param) {
-            let countries = {
+            const countries = {
               country_code: this.countryForm.get('countryCode').value,
               country_name: this.countryForm.get('countryName').value,
               country_region: this.countryForm.get('countryRegion').value,
-            }
+            };
 
             this.countriesService.updateCountry(param.id, countries);
             this.countriesService.getCountry().subscribe(
@@ -99,7 +99,7 @@ export class EditCountryComponent implements OnInit {
                 this.countries = countries;
 
               },
-              error => this.errorMessage = <any>error
+              error => this.errorMessage = error as any
             );
             this.router.navigate(['/country']);
             this.toastr.success('Record successfully updated.', '',
@@ -113,7 +113,7 @@ export class EditCountryComponent implements OnInit {
 
           }
         }
-      )
+      );
     // if (this.countryForm.valid) {
     //   if (this.countryForm.dirty) {
     //     const p = { ...this.country, ...this.countryForm.value };

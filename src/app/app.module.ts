@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
- 
+
 
 
 import { AppComponent } from './app.component';
@@ -34,12 +34,12 @@ import { EditCountryComponent } from './edit-country/edit-country.component';
     ReactiveFormsModule,
     NgbModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
 }

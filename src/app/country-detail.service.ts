@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CountryDetailService {
-  baseUrl: string = 'https://restcountries.eu/rest/v2/name/';
+  baseUrl = 'https://restcountries.eu/rest/v2/name/';
 
   public countries: Array<any>[];
 
@@ -15,7 +15,7 @@ export class CountryDetailService {
 
   getCountryDetail(name) {
     this.httpService.get(this.baseUrl + name)
-      .subscribe((countries:Array<any>[]) => {
+      .subscribe((countries: Array<any>[]) => {
         this.countries = countries;
       },
       (err: HttpErrorResponse) => {

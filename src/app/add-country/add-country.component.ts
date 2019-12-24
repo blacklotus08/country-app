@@ -26,12 +26,12 @@ export class AddCountryComponent implements OnInit {
   private sub: Subscription;
 
   constructor(private countriesService: CountriesService,
-    private spinner: NgxSpinnerService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
-    private fb: FormBuilder,
-    private toastr: ToastrService
+              private spinner: NgxSpinnerService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private location: Location,
+              private fb: FormBuilder,
+              private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class AddCountryComponent implements OnInit {
       countries => {
         this.countries = countries;
       },
-      error => this.errorMessage = <any>error
+      error => this.errorMessage = error as any
     );
 
     this.countryForm = this.fb.group({
@@ -49,7 +49,7 @@ export class AddCountryComponent implements OnInit {
       countryRegion: 'Africa'
     });
 
-    this.countryForm.controls['countryCode'].setAsyncValidators(ValidateIdNotTaken.createValidator(this.countriesService));
+    this.countryForm.controls.countryCode.setAsyncValidators(ValidateIdNotTaken.createValidator(this.countriesService));
 
     setTimeout(() => {
       this.spinner.hide();
@@ -62,7 +62,7 @@ export class AddCountryComponent implements OnInit {
   }
 
   save() {
-    let countries = {
+    const countries = {
       country_code: this.countryForm.get('countryCode').value,
       country_name: this.countryForm.get('countryName').value,
       country_region: this.countryForm.get('countryRegion').value,

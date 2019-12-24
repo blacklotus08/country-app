@@ -6,21 +6,21 @@ import {AddCountryComponent} from './add-country/add-country.component';
 import {EditCountryComponent} from './edit-country/edit-country.component';
 import { CountryEditGuard } from './country-edit.guard';
 
-const routes: Routes = [ 
+const routes: Routes = [
   { path: '', redirectTo: '/country', pathMatch: 'full' },
   { path: 'country' , component : CountryComponent },
   { path: 'country-detail/:name' , component : CountryDetailComponent },
   { path: 'add-country' , component : AddCountryComponent },
-  { path: 'edit-country/:id' , 
+  { path: 'edit-country/:id' ,
     canDeactivate : [CountryEditGuard],
-    component : EditCountryComponent 
+    component : EditCountryComponent
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
-  
+
 })
 
 export class AppRoutingModule { }

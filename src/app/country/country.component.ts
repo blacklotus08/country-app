@@ -23,7 +23,7 @@ export class CountryComponent {
   pageSize = 5;
   collectionSize: number;
 
-  @ViewChild("reset", {static: false}) nameField: ElementRef;
+  @ViewChild('reset', {static: false}) nameField: ElementRef;
 
   _listFilter = '';
   get listFilter(): string {
@@ -50,9 +50,9 @@ export class CountryComponent {
   }
 
   constructor(private countriesService: CountriesService,
-    private spinner: NgxSpinnerService,
-    private toastr: ToastrService,
-    private router: Router
+              private spinner: NgxSpinnerService,
+              private toastr: ToastrService,
+              private router: Router
   ) { }
 
   performFilter(filterBy: string): Country[] {
@@ -62,21 +62,21 @@ export class CountryComponent {
 
     if (this._regionFilter == '') {
       return this.countries.filter((country: Country) =>
-      (country.country_code.toLocaleLowerCase().indexOf(filterBy) !== -1 || country.country_name.toLocaleLowerCase().indexOf(filterBy) !== -1))
+      (country.country_code.toLocaleLowerCase().indexOf(filterBy) !== -1 || country.country_name.toLocaleLowerCase().indexOf(filterBy) !== -1));
 
-    }else {
+    } else {
       return this.countries.filter((country: Country) =>
       (country.country_code.toLocaleLowerCase().indexOf(filterBy) !== -1 || country.country_name.toLocaleLowerCase().indexOf(filterBy) !== -1)
-      && country.country_region == this._regionFilter)
+      && country.country_region == this._regionFilter);
     }
 
     /* Filter by Search Bar and Drop Down Filter */
-    
+
   }
 
   performFilterbyRegion(filterBy: string): Country[] {
     console.log(filterBy + 'Filter by Region');
-    return this.countries.filter((country: Country) => country.country_region.indexOf(filterBy) !== -1)
+    return this.countries.filter((country: Country) => country.country_region.indexOf(filterBy) !== -1);
   }
 
   onChange(deviceValue) {
@@ -95,9 +95,9 @@ export class CountryComponent {
         this.countries = countries;
         this.AllCountries = countries;
         this.collectionSize = this.countries.length;
-        this.spinner.hide();    
+        this.spinner.hide();
       },
-      error => this.errorMessage = <any>error
+      error => this.errorMessage = error as any
     );
   }
 
@@ -108,7 +108,7 @@ export class CountryComponent {
   }
 
   deleteCountry(id) {
-    if (confirm("Are you sure to delete record?")) {
+    if (confirm('Are you sure to delete record?')) {
       this.countriesService.deleteCountry(id, this.countries);
       this.ngOnInit();
       this.toastr.success('Record successfully deleted.', '',
@@ -127,6 +127,6 @@ export class CountryComponent {
     this._listFilter = '';
     this.onChange(this._regionFilter);
     this.nameField.nativeElement.blur();
- 
+
   }
 }

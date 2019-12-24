@@ -7,7 +7,7 @@ import {EditCountryComponent} from './edit-country/edit-country.component';
 import { CountryEditGuard } from './country-edit.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/country', pathMatch: 'full' },
+  { path: '', component : CountryComponent },
   { path: 'country' , component : CountryComponent },
   { path: 'country-detail/:name' , component : CountryDetailComponent },
   { path: 'add-country' , component : AddCountryComponent },
